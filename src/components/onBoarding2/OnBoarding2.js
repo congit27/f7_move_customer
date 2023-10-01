@@ -4,7 +4,7 @@ import { View, Image, Text, TouchableOpacity } from 'react-native';
 import Images from '../../../assets/Images';
 import styles from './OnBoarding2Styles';
 
-const OnBoarding2 = () => {
+const OnBoarding2 = ({ navigation }) => {
     return (
         <>
             <View style={styles.container}>
@@ -24,7 +24,11 @@ const OnBoarding2 = () => {
                         </View>
 
                         <View style={styles.btnContainer}>
-                            <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainer}>
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                style={styles.btnTextContainer}
+                                onPress={() => navigation.navigate('HomePage')}
+                            >
                                 <Text style={styles.btnText}>Next</Text>
                             </TouchableOpacity>
                         </View>
