@@ -72,10 +72,16 @@ const styles = StyleSheet.create({
     },
 
     btnTextContainer: {
-        backgroundColor: '#45849f',
+        position: 'absolute',
+        bottom: 20,
+        left: 10,
+        right: 10,
+        alignItems: 'center',
+        backgroundColor: 'red',
         paddingVertical: 10,
         paddingHorizontal: 40,
         borderRadius: 15,
+        marginBottom: 20,
     },
     btnText: {
         fontSize: 18,

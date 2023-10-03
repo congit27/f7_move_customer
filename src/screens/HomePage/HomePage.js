@@ -8,7 +8,7 @@ import Images from '../../../assets/Images';
 import styles from './HomePageStyles';
 
 const HomePage = () => {
-    const socket = io('http://192.168.0.102:3000');
+    const socket = io('https://railwaytest-production-a531.up.railway.app/');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [address, setAddress] = useState(null);
@@ -22,7 +22,6 @@ const HomePage = () => {
             }
 
             let location = await Location.getCurrentPositionAsync({});
-            let address = await Location.reverseGeocodeAsync(location.coords);
             setLocation(location);
 
             // convert location => desc address
@@ -33,7 +32,6 @@ const HomePage = () => {
         })();
     }, []);
 
-    // Xử lý sự kiện khi người dùng click vào nút
     const handleSendRequest = () => {
         console.log('Send request, location: ', address);
         socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', position: address });
