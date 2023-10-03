@@ -1,10 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Splash from './src/components/splash/Splash';
-import OnBoarding1 from './src/components/onBoarding1/OnBoarding1';
-import OnBoarding2 from './src/components/onBoarding2/OnBoarding2';
-import HomePage from './src/components/HomePage/HomePage';
+import Splash from './src/screens/splash/Splash';
+import OnBoarding1 from './src/screens/onBoarding1/OnBoarding1';
+import OnBoarding2 from './src/screens/onBoarding2/OnBoarding2';
+import HomePage from './src/screens/HomePage/HomePage';
 
 const Stack = createNativeStackNavigator();
 

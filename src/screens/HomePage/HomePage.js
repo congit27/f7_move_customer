@@ -6,7 +6,7 @@ import Images from '../../../assets/Images';
 import styles from './HomePageStyles';
 
 const HomePage = () => {
-    const socket = io('http://192.168.0.102:3000');
+    const socket = io('https://railwaytest-production-a531.up.railway.app/');
     const handleSendRequest = () => {
         console.log('Send request');
         socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!' });
