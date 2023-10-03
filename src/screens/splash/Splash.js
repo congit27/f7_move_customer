@@ -5,8 +5,6 @@ import Images from '../../../assets/Images';
 import styles from './SplashStyles';
 
 const Splash = ({ navigation }) => {
-    console.log(navigation);
-
     return (
         <>
             <View style={styles.container}>

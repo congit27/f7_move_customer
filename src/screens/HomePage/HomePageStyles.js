@@ -83,6 +83,9 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontWeight: '700',
     },
+    map: {
+        flex: 1,
+    },
 });
 
 export default styles;
