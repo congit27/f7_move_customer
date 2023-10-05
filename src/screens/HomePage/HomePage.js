@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import * as Location from 'expo-location';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
+import { View, Text, TouchableOpacity } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
-import Images from '../../../assets/Images';
 import styles from './HomePageStyles';
 
 const HomePage = () => {
     const socket = io('https://railwaytest-production-a531.up.railway.app/');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const [address, setAddress] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -23,18 +21,12 @@ const HomePage = () => {
 
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
-
-            // convert location => desc address
-            if (location.coords) {
-                let add = await Location.reverseGeocodeAsync(location.coords);
-                setAddress(add[0]);
-            }
         })();
     }, []);
 
     const handleSendRequest = () => {
-        console.log('Send request, location: ', address);
-        socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', position: address });
+        console.log('Send request, location: ', location);
+        socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
     };
 
     return (

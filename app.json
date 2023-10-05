@@ -24,6 +24,9 @@
         "web": {
             "favicon": "./assets/favicon.png"
         },
+        "extra": {
+            "expoHost": "192.168.0.102"
+        },
         "permissions": ["CAMERA", "AUDIO_RECORDING", "LOCATION"]
     }
 }
