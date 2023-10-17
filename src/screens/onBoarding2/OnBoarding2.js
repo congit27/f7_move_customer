@@ -27,7 +27,7 @@ const OnBoarding2 = ({ navigation }) => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 style={styles.btnTextContainer}
-                                onPress={() => navigation.navigate('HomePage')}
+                                onPress={() => navigation.navigate('Navigation')}
                             >
                                 <Text style={styles.btnText}>Next</Text>
                             </TouchableOpacity>
