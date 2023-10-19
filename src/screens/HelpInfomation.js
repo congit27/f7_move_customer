@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, ScrollView, BackHandler, TouchableOpacity, Alert } from 'react-native';
 
 import styles from './ScreensStyles';
 import HeaderButton from '../components/headerButton/HeaderButton';
@@ -16,9 +16,32 @@ const data = [
     { label: 'Item 7', value: '7' },
     { label: 'Item 8', value: '8' },
 ];
-const HelpInfomation = ({ handleCloseHelpinfo }) => {
+const HelpInfomation = ({ handleCloseHelpinfo, setSearchHelpTrue }) => {
     //value dropdown
     const [value, setValue] = useState(null);
+
+    useEffect(() => {
+        const backAction = () => {
+            Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+                {
+                    text: 'Cancel',
+                    onPress: () => null,
+                    style: 'cancel',
+                },
+                { text: 'YES', onPress: () => BackHandler.exitApp() },
+            ]);
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+        return () => backHandler.remove();
+    }, []);
+
+    const handleSubmitRequest = () => {
+        handleCloseHelpinfo();
+        setSearchHelpTrue();
+    };
 
     return (
         <>
@@ -127,7 +150,11 @@ const HelpInfomation = ({ handleCloseHelpinfo }) => {
                     </Text>
                     <TextInput style={styles.helpInfoInput} placeholder="vd: 43A-15385..." />
 
-                    <TouchableOpacity activeOpacity={0.8} style={styles.btnTextSendReqHelpContainer}>
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        style={styles.btnTextSendReqHelpContainer}
+                        onPress={handleSubmitRequest}
+                    >
                         <Text style={styles.btnText}>Gửi yêu cầu cứu hộ</Text>
                     </TouchableOpacity>
                 </View>

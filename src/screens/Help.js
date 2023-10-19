@@ -6,12 +6,14 @@ import MapView, { Marker } from 'react-native-maps';
 import { View, Text, TouchableOpacity, Alert, Modal, Pressable } from 'react-native';
 import styles from './ScreensStyles';
 import HelpInfomation from './HelpInfomation';
+import SearchingHelp from '../components/searchingHelp/SearchingHelp';
 
 const Help = ({ navigation }) => {
     const socket = io('https://railwaytest-production-a531.up.railway.app/');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalHelpInfoVisible, setModalHelpInfoVisible] = useState(false);
+    const [searchHelp, setSearchHelp] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -32,7 +34,18 @@ const Help = ({ navigation }) => {
     };
 
     const handleCloseHelpinfo = () => {
-        setModalVisible(false);
+        setModalHelpInfoVisible(false);
+    };
+
+    const handleOpenHelpInfo = () => {
+        setModalHelpInfoVisible(true);
+    };
+    const setSearchHelpTrue = () => {
+        setSearchHelp(true);
+    };
+
+    const setSearchHelpfalse = () => {
+        setSearchHelp(false);
     };
 
     return (
@@ -65,21 +78,58 @@ const Help = ({ navigation }) => {
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={modalHelpInfoVisible}
                 onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisible(!modalVisible);
+                    Alert.alert(
+                        'Huỷ nhập thông tin!',
+                        'Bạn có chắc muốn nhập.(toàn bộ thông tin bạn vừa nhập sẽ mất.)?',
+                        [
+                            {
+                                text: 'Quay lại',
+                                onPress: () => null,
+                                style: 'cancel',
+                            },
+                            { text: 'Xác nhận huỷ', onPress: () => handleCloseHelpinfo() },
+                        ],
+                    );
                 }}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <HelpInfomation handleCloseHelpinfo={handleCloseHelpinfo} />
+                        <HelpInfomation
+                            handleCloseHelpinfo={handleCloseHelpinfo}
+                            setSearchHelpTrue={setSearchHelpTrue}
+                        />
                     </View>
                 </View>
             </Modal>
-            <TouchableOpacity onPress={() => setModalVisible(true)} activeOpacity={0.8} style={styles.btnTextContainer}>
+            <TouchableOpacity
+                onPress={() => setModalHelpInfoVisible(true)}
+                activeOpacity={0.8}
+                style={styles.btnTextContainer}
+            >
                 <Text style={styles.btnText}>Yêu cầu cứu hộ</Text>
             </TouchableOpacity>
+
+            {/* modal searching help */}
+            <Modal
+                style={styles.abs}
+                animationType="slide"
+                transparent={true}
+                visible={searchHelp}
+                onRequestClose={() => {
+                    Alert.alert('Huỷ tìm kiếm!', 'Bạn có chắc muốn huỷ tìm kiếm?', [
+                        {
+                            text: 'Quay lại',
+                            onPress: () => null,
+                            style: 'cancel',
+                        },
+                        { text: 'Xác nhận huỷ', onPress: () => setSearchHelpfalse() },
+                    ]);
+                }}
+            >
+                <SearchingHelp handleOpenHelpInfo={handleOpenHelpInfo} setSearchHelpfalse={setSearchHelpfalse} />
+            </Modal>
         </View>
     );
 };

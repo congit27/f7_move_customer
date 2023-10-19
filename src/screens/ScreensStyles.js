@@ -141,6 +141,11 @@ const styles = StyleSheet.create({
         marginBottom: 70,
     },
 
+    abs: {
+        height: 200,
+        backgroundColor: 'red',
+    },
+
     //end help infomation styles
 });
 
