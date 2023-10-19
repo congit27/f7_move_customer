@@ -7,6 +7,7 @@ import { View, Text, TouchableOpacity, Alert, Modal, Pressable } from 'react-nat
 import styles from './ScreensStyles';
 import HelpInfomation from './HelpInfomation';
 import SearchingHelp from '../components/searchingHelp/SearchingHelp';
+import RequestReceived from '../components/requestReceived/RequestReceived';
 
 const Help = ({ navigation }) => {
     const socket = io('https://railwaytest-production-a531.up.railway.app/');
@@ -14,6 +15,7 @@ const Help = ({ navigation }) => {
     const [errorMsg, setErrorMsg] = useState(null);
     const [modalHelpInfoVisible, setModalHelpInfoVisible] = useState(false);
     const [searchHelp, setSearchHelp] = useState(false);
+    const [requestReceived, setRequestReceived] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -46,6 +48,13 @@ const Help = ({ navigation }) => {
 
     const setSearchHelpfalse = () => {
         setSearchHelp(false);
+    };
+
+    //direct to price page
+    const handleDirectToPricePage = () => {
+        //handle navigation
+
+        setRequestReceived(false);
     };
 
     return (
@@ -129,6 +138,26 @@ const Help = ({ navigation }) => {
                 }}
             >
                 <SearchingHelp handleOpenHelpInfo={handleOpenHelpInfo} setSearchHelpfalse={setSearchHelpfalse} />
+            </Modal>
+
+            {/* modal request is received */}
+            <Modal
+                style={styles.abs}
+                animationType="slide"
+                transparent={true}
+                visible={requestReceived}
+                // onRequestClose={() => {
+                //     Alert.alert('Thoát!', 'Bạn có chắc muốn quay lại?', [
+                //         {
+                //             text: 'Quay lại',
+                //             onPress: () => null,
+                //             style: 'cancel',
+                //         },
+                //         { text: '', onPress: () => setSearchHelpfalse() },
+                //     ]);
+                // }}
+            >
+                <RequestReceived handleDirectToPricePage={handleDirectToPricePage} />
             </Modal>
         </View>
     );
