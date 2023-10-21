@@ -16,19 +16,19 @@ const data = [
     { label: 'Item 7', value: '7' },
     { label: 'Item 8', value: '8' },
 ];
-const HelpInfomation = ({ handleCloseHelpinfo, setSearchHelpTrue }) => {
+const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
     //value dropdown
     const [value, setValue] = useState(null);
 
     useEffect(() => {
         const backAction = () => {
-            Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+            Alert.alert('Quay lại!', 'Bạn có chắc chắn. (toàn bộ dữ liệu bạn nhập sẽ mất)', [
                 {
                     text: 'Cancel',
                     onPress: () => null,
                     style: 'cancel',
                 },
-                { text: 'YES', onPress: () => BackHandler.exitApp() },
+                { text: 'YES', onPress: () => handleCloseHelpInfo() },
             ]);
             return true;
         };
@@ -39,13 +39,14 @@ const HelpInfomation = ({ handleCloseHelpinfo, setSearchHelpTrue }) => {
     }, []);
 
     const handleSubmitRequest = () => {
-        handleCloseHelpinfo();
-        setSearchHelpTrue();
+        //handle push request ...
+        handleCloseHelpInfo();
+        handleSearch();
     };
 
     return (
         <>
-            <HeaderButton title="Nhập thông tin" handleCloseHelpinfo={handleCloseHelpinfo} />
+            <HeaderButton title="Nhập thông tin" handleClose={handleCloseHelpInfo} />
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}

@@ -7,6 +7,7 @@ import OnBoarding2 from './src/screens/onBoarding2/OnBoarding2';
 import HomePage from './src/screens/HomePage';
 import Navigation from './src/components/navigation/Navigation';
 // import HelpInfomation from './src/screens/HelpInfomation';
+import PartnerInfomation from './src/screens/PartnerInfomation';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +32,7 @@ const App = () => {
                 <Stack.Screen name="OnBoarding2" component={OnBoarding2} />
                 <Stack.Screen name="HomePage" component={HomePage} />
                 <Stack.Screen name="Navigation" component={Navigation} />
-                {/* <Stack.Screen name="HelpInfomation" component={HelpInfomation} /> */}
+                <Stack.Screen name="PartnerInfomation" component={PartnerInfomation} />
             </Stack.Navigator>
         </NavigationContainer>
     );

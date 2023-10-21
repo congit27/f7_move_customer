@@ -46,38 +46,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: Platform.OS === 'android' ? 40 : 0,
     },
-    map: {
-        flex: 1,
-    },
-    btnTextContainer: {
-        position: 'absolute',
-        bottom: 20,
-        left: 10,
-        right: 10,
-        alignItems: 'center',
-        backgroundColor: 'red',
-        paddingVertical: 10,
-        paddingHorizontal: 40,
-        borderRadius: 15,
-        marginBottom: 60,
-    },
-    btnText: {
-        fontSize: 18,
-        padding: 5,
-        color: '#ffffff',
-        fontWeight: '700',
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    modalView: {
-        width: Dimensions.get('window').width,
-        backgroundColor: 'white',
-        flex: 1,
-        elevation: 5,
-    },
 
     //help infomation styles
     helpInfoContainer: {
@@ -140,12 +108,24 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 70,
     },
-
-    abs: {
-        height: 200,
+    btnTextContainer: {
+        position: 'absolute',
+        bottom: 20,
+        left: 10,
+        right: 10,
+        alignItems: 'center',
         backgroundColor: 'red',
+        paddingVertical: 10,
+        paddingHorizontal: 40,
+        borderRadius: 15,
+        marginBottom: 60,
     },
-
+    btnText: {
+        fontSize: 18,
+        padding: 5,
+        color: '#ffffff',
+        fontWeight: '700',
+    },
     //end help infomation styles
 });
 

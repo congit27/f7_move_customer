@@ -1,10 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, Text, Alert, View } from 'react-native';
+import { TouchableOpacity, Text, Alert, View, BackHandler } from 'react-native';
 
 import styles from './SearchingHelpStyles';
 import LoadingDots from 'react-native-loading-dots';
 
-const SearchingHelp = ({ handleOpenHelpInfo, setSearchHelpfalse }) => {
+const SearchingHelp = ({ handleCancelSearch }) => {
+    //listen event user back
+    useEffect(() => {
+        const backAction = () => {
+            Alert.alert('Huỷ tìm kiếm!', 'Bạn có chắc muốn huỷ.', [
+                {
+                    text: 'Cancel',
+                    onPress: () => null,
+                    style: 'cancel',
+                },
+                { text: 'YES', onPress: () => handleCancelSearch() },
+            ]);
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+        return () => backHandler.remove();
+    }, []);
+
     const handleClickCancel = () => {
         Alert.alert('Huỷ tìm kiếm!', 'Bạn có chắc muốn huỷ tìm kiếm?', [
             {
@@ -14,10 +33,7 @@ const SearchingHelp = ({ handleOpenHelpInfo, setSearchHelpfalse }) => {
             },
             {
                 text: 'Xác nhận huỷ',
-                onPress: () => {
-                    handleOpenHelpInfo();
-                    setSearchHelpfalse();
-                },
+                onPress: () => handleCancelSearch(),
             },
         ]);
     };

@@ -4,9 +4,9 @@ import { AntDesign } from '@expo/vector-icons';
 
 import styles from './RequestReceivedStyles';
 
-const RequestReceived = ({ handleDirectToPricePage }) => {
-    const handleClickViewRoute = () => {
-        handleDirectToPricePage();
+const RequestReceived = ({ handleDirectToPrice }) => {
+    const handleDirection = () => {
+        handleDirectToPrice();
     };
 
     return (
@@ -16,7 +16,7 @@ const RequestReceived = ({ handleDirectToPricePage }) => {
             </View>
             <Text style={styles.title}>Yêu cầu của bạn đã được nhận!</Text>
 
-            <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainer} onPress={handleClickViewRoute}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainer} onPress={handleDirection}>
                 <Text style={styles.btnText}>Xem lộ trình chi tiết</Text>
             </TouchableOpacity>
         </View>
