@@ -14,6 +14,7 @@ import styles from './NavigationStyles';
 const Tab = createBottomTabNavigator();
 const screenOptions = {
     tabBarShowLabel: false,
+    tabBarHideOnKeyboard: true,
     headerShown: false,
     tabBarStyle: {
         position: 'absolute',
