@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, BackHandler, TouchableOpacity, Alert } from 'react-native';
-
+import io from 'socket.io-client';
+import * as Location from 'expo-location';
 import styles from './ScreensStyles';
 import HeaderButton from '../components/headerButton/HeaderButton';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -17,6 +18,22 @@ const data = [
     { label: 'Item 8', value: '8' },
 ];
 const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
+    const socket = io('https://railwaytest-production-a531.up.railway.app/');
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        })();
+    }, []);
     //value dropdown
     const [value, setValue] = useState(null);
 
@@ -42,6 +59,11 @@ const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
         //handle push request ...
         handleCloseHelpInfo();
         handleSearch();
+    };
+
+    const handleSendRequest = () => {
+        console.log('Send request, location: ', location);
+        socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
     };
 
     return (
@@ -154,9 +176,9 @@ const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
                     <TouchableOpacity
                         activeOpacity={0.8}
                         style={styles.btnTextSendReqHelpContainer}
-                        onPress={handleSubmitRequest}
+                        onPress={handleSendRequest}
                     >
-                        <Text style={styles.btnText}>Gửi yêu cầu cứu hộ</Text>
+                        <Text style={styles.btnText}>Gửi</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
 
     //help infomation styles
     helpInfoContainer: {
+        backgroundColor: '#ffffff',
         flex: 1,
         padding: 18,
     },

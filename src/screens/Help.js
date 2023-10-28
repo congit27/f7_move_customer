@@ -13,7 +13,7 @@ const Help = ({ navigation }) => {
     const [showMap, setShowMap] = useState(true);
     const [showHelpInfo, setShowHelpInfo] = useState(false);
     const [showSearching, setShowSearching] = useState(false);
-    const [showReceived, setShowReceived] = useState(true);
+    const [showReceived, setShowReceived] = useState(false);
     const [showPrice, setShowPrice] = useState(false);
 
     const handleShowHelpInfo = () => {
