@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, Text, Alert, View, BackHandler } from 'react-native';
-
+import io from 'socket.io-client';
 import styles from './SearchingHelpStyles';
 import LoadingDots from 'react-native-loading-dots';
 
 const SearchingHelp = ({ handleCancelSearch }) => {
+    const socket = io('https://railwaytest-production-a531.up.railway.app/');
+
+    socket.on('new-rescue-request',(data) => {
+        console.log("Thông tin đã được nhận từ partner: ", data)
+    })
     //listen event user back
     useEffect(() => {
         const backAction = () => {

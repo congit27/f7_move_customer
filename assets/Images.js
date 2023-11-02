@@ -4,6 +4,7 @@ const Images = {
     onBoarding2: require('./onboarding2.jpg'),
     favicon: require('./favicon.png'),
     ///you can add more many images like this here.
+    img1: require('./img1.png'),
 };
 
 export default Images;

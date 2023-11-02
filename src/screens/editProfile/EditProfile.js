@@ -1,12 +1,17 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import io from 'socket.io-client';
 import styles from './EditProfileStyles';
 import Images from '../../../assets/Images';
 import BackTopbar from '../../components/backTopbar/BackTopbar';
 
 const EditProfile = ({ editBackToInfo }) => {
+    const socket = io('https://railwaytest-production-a531.up.railway.app/');
+    const HandleTest = () => {
+        console.log('Test thông báo');
+        socket.emit('new-notification', { message: 'Lưu profile thành công' });
+    }
     return (
         <View style={styles.container}>
             <BackTopbar editBackToInfo={editBackToInfo} />
@@ -28,7 +33,7 @@ const EditProfile = ({ editBackToInfo }) => {
                         <TextInput style={styles.input} placeholder="Phone number..." keyboardType="numeric" />
                     </View>
 
-                    <TouchableOpacity activeOpacity={0.3} style={styles.btnTextContainer}>
+                    <TouchableOpacity onPress={HandleTest} activeOpacity={0.3} style={styles.btnTextContainer}>
                         <Text style={styles.btnText}>Save</Text>
                     </TouchableOpacity>
                 </View>

@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
 
 import HomePage from '../../screens/HomePage';
-import Service from '../../screens/Service';
+import Service from '../../screens/Service/Service';
 import Help from '../../screens/Help';
 import Profile from '../../screens/Profile';
 import HelpInfomation from '../../screens/HelpInfomation';
@@ -50,9 +50,10 @@ const Navigation = ({ navigation }) => {
                 }}
             />
             <Tab.Screen
-                name="Service"
+                name="Hoạt động"
                 component={Service}
-                options={{
+                options={({ route }) => ({
+                    headerShown: true, // Hiển thị thanh tiêu đề
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View
@@ -70,8 +71,9 @@ const Navigation = ({ navigation }) => {
                             </View>
                         );
                     },
-                }}
+                })}
             />
+
             <Tab.Screen
                 name="Help"
                 component={Help}

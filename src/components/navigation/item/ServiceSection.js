@@ -19,7 +19,6 @@ const ServiceSection = ({ navigation }) => {
                 <ServiceItem />
                 <ServiceItem />
                 <ServiceItem />
-                <ServiceItem />
             </View>
         </View>
     );

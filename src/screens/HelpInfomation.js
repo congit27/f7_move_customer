@@ -55,15 +55,12 @@ const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
         return () => backHandler.remove();
     }, []);
 
-    const handleSubmitRequest = () => {
-        //handle push request ...
-        handleCloseHelpInfo();
-        handleSearch();
-    };
 
     const handleSendRequest = () => {
         console.log('Send request, location: ', location);
         socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
+        handleCloseHelpInfo();
+        handleSearch();
     };
 
     return (

@@ -24,11 +24,6 @@ const MapViewComponent = ({ handleShowHelpInfo }) => {
         })();
     }, []);
 
-    const handleSendRequest = () => {
-        console.log('Send request, location: ', location);
-        socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
-    };
-
     return (
         <>
             {location && (
