@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import styles from './ScreensStyles';
 import HeaderButton from '../components/headerButton/HeaderButton';
 import { Dropdown } from 'react-native-element-dropdown';
+import { sendRescueRequest } from '../services/webSocketConnection';
 
 //data dropdown test
 const data = [
@@ -17,7 +18,7 @@ const data = [
     { label: 'Item 7', value: '7' },
     { label: 'Item 8', value: '8' },
 ];
-const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
+const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
     const socket = io('http://192.168.0.102:3000');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -56,8 +57,7 @@ const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
     }, []);
 
     const handleSendRequest = () => {
-        console.log('Send request, location: ', location);
-        socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
+        sendRescueRequest(location);
         handleCloseHelpInfo();
         handleSearch();
     };
@@ -182,4 +182,4 @@ const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
     );
 };
 
-export default HelpInfomation;
+export default HelpInformation;

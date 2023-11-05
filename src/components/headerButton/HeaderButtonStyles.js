@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
+        marginTop: Platform.OS === 'ios' ? 36 : 0,
     },
     headerContainer: {
         flexDirection: 'row',

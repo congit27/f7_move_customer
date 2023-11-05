@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, ScrollView } from 'react-native';
 import { FontAwesome, EvilIcons } from '@expo/vector-icons';
+
 import Carousel from '../components/Carousel/Carousel';
 import CarTypes from '../components/RepairType/CarTypes';
-import ServiceSection from '../components/navigation/item/ServiceSection';
-import styles from './ScreensStyles';
 import BrandSale from '../components/BrandSale/BrandSale';
+import styles from './ScreensStyles';
 
 const HomePage = ({ navigation }) => {
     return (
@@ -23,14 +23,12 @@ const HomePage = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}
                 style={styles.serviceContainer}
             >
-            {/* Phần carousel */}
-            <Carousel />
-            {/* Phần CarTypes */}
-            <CarTypes />
-            
-            <BrandSale />
+                {/* Phần carousel */}
+                <Carousel />
+                {/* Phần CarTypes */}
+                <CarTypes />
+                <BrandSale />
             </ScrollView>
-
         </View>
     );
 };

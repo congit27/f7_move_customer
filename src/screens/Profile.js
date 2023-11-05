@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ProfileInfo from './profileInfomation/ProfileInfo';
-import EditProfile from './editProfile/EditProfile';
+import ProfileInfo from './profileInformationPage/ProfileInfo';
+import EditProfile from './editProfilePage/EditProfile';
 
 const Profile = ({ navigation }) => {
     const [showProfPage, setShowProfPage] = useState(true);

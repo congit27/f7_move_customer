@@ -3,13 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, View } from 'react-native';
 
 import HomePage from '../../screens/HomePage';
-import Service from '../../screens/Service/Service';
+import Service from '../../screens/servicePage/Service';
 import Help from '../../screens/Help';
 import Profile from '../../screens/Profile';
-import HelpInfomation from '../../screens/HelpInfomation';
+import HelpInformation from '../../screens/HelpInformation';
 
 import { Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import styles from './NavigationStyles';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -22,7 +23,7 @@ const screenOptions = {
         right: 0,
         left: 0,
         elevation: 0,
-        height: 60,
+        height: Platform.OS === 'ios' ? 84 : 60,
         background: '#fff',
     },
 };
@@ -107,8 +108,8 @@ const Navigation = ({ navigation }) => {
             />
 
             <Tab.Screen
-                name="HelpInfomation"
-                component={HelpInfomation}
+                name="HelpInformation"
+                component={HelpInformation}
                 options={{
                     tabBarButton: () => null,
                     tabBarVisible: false,

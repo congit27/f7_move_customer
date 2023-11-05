@@ -4,7 +4,7 @@ import { View, Text, Modal } from 'react-native';
 
 import styles from './ScreensStyles';
 import MapViewComponent from '../components/mapView/MapViewComponent';
-import HelpInfomation from './HelpInfomation';
+import HelpInformation from './HelpInformation';
 import SearchingHelp from '../components/searchingHelp/SearchingHelp';
 import RequestReceived from '../components/requestReceived/RequestReceived';
 import PricePage from './pricePage/PricePage';
@@ -15,7 +15,6 @@ const Help = ({ navigation }) => {
     const [showSearching, setShowSearching] = useState(false);
     const [showReceived, setShowReceived] = useState(false);
     const [showPrice, setShowPrice] = useState(false);
-    const socket = io('http://192.168.0.102:3000');
 
     const handleShowHelpInfo = () => {
         setShowMap(false);
@@ -36,9 +35,6 @@ const Help = ({ navigation }) => {
         setShowHelpInfo(true);
         setShowMap(false);
         setShowSearching(false);
-
-        console.log('Send cancel request!');
-        socket.emit('cancel-rescue-request', { message: 'Hủy yêu cầu!' });
     };
 
     const handleDirectToPrice = () => {
@@ -52,7 +48,7 @@ const Help = ({ navigation }) => {
             {/* >>> screen map */}
             {showMap && <MapViewComponent handleShowHelpInfo={handleShowHelpInfo} />}
 
-            {showHelpInfo && <HelpInfomation handleCloseHelpInfo={handleCloseHelpInfo} handleSearch={handleSearch} />}
+            {showHelpInfo && <HelpInformation handleCloseHelpInfo={handleCloseHelpInfo} handleSearch={handleSearch} />}
 
             {showSearching && <SearchingHelp handleCancelSearch={handleCancelSearch} />}
 

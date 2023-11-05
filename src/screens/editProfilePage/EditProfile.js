@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import io from 'socket.io-client';
 import styles from './EditProfileStyles';
 import Images from '../../../assets/Images';
-import BackTopbar from '../../components/backTopbar/BackTopbar';
+import BackTopBar from '../../components/BackTopBar/BackTopBar';
 
 const EditProfile = ({ editBackToInfo }) => {
     const socket = io('http://192.168.0.102:3000');
@@ -14,7 +14,7 @@ const EditProfile = ({ editBackToInfo }) => {
     };
     return (
         <View style={styles.container}>
-            <BackTopbar editBackToInfo={editBackToInfo} />
+            <BackTopBar editBackToInfo={editBackToInfo} />
             <ScrollView automaticallyAdjustKeyboardInsets={true}>
                 <View style={styles.profContainer}>
                     <View style={styles.avatarCont}>

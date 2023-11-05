@@ -1,13 +1,11 @@
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './MapViewComponentStyles';
 
 const MapViewComponent = ({ handleShowHelpInfo }) => {
-    const socket = io('http://192.168.0.102:3000');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 

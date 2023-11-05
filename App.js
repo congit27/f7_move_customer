@@ -1,13 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Splash from './src/screens/splash/Splash';
-import OnBoarding1 from './src/screens/onBoarding1/OnBoarding1';
-import OnBoarding2 from './src/screens/onBoarding2/OnBoarding2';
+import Splash from './src/screens/splashPage/Splash';
+import OnBoarding1 from './src/screens/BoardingPage/OnBoarding1';
+import OnBoarding2 from './src/screens/BoardingSubPage/OnBoarding2';
 import HomePage from './src/screens/HomePage';
 import Navigation from './src/components/navigation/Navigation';
-// import HelpInfomation from './src/screens/HelpInfomation';
-import PartnerInfomation from './src/screens/PartnerInfomation';
+import PartnerInformation from './src/screens/PartnerInformation';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +31,7 @@ const App = () => {
                 <Stack.Screen name="OnBoarding2" component={OnBoarding2} />
                 <Stack.Screen name="HomePage" component={HomePage} />
                 <Stack.Screen name="Navigation" component={Navigation} />
-                <Stack.Screen name="PartnerInfomation" component={PartnerInfomation} />
+                <Stack.Screen name="PartnerInformation" component={PartnerInformation} />
             </Stack.Navigator>
         </NavigationContainer>
     );

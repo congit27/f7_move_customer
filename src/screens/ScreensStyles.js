@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: 18,
         backgroundColor: '#ffffff',
-        paddingTop: Platform.OS === 'android' ? 40 : 0,
+        paddingTop: Platform.OS === 'android' ? 40 : 60,
     },
     locationContainer: {
         flexDirection: 'row',
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 40,
         borderRadius: 15,
-        marginBottom: 60,
+        marginBottom: 500,
     },
     btnText: {
         fontSize: 18,

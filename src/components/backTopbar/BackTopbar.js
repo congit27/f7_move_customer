@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-import styles from './BacktopBarStyles';
+import styles from './BackTopBarStyles';
 
-const BackTopbar = ({ editBackToInfo }) => {
+const BackTopBar = ({ editBackToInfo }) => {
     const handleBack = () => {
         editBackToInfo();
     };
@@ -27,4 +27,4 @@ const BackTopbar = ({ editBackToInfo }) => {
     );
 };
 
-export default BackTopbar;
+export default BackTopBar;
