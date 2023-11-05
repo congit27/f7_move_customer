@@ -5,11 +5,11 @@ import styles from './SearchingHelpStyles';
 import LoadingDots from 'react-native-loading-dots';
 
 const SearchingHelp = ({ handleCancelSearch }) => {
-    const socket = io('https://railwaytest-production-a531.up.railway.app/');
+    const socket = io('http://192.168.0.102:3000');
 
-    socket.on('new-rescue-request',(data) => {
-        console.log("Thông tin đã được nhận từ partner: ", data)
-    })
+    socket.on('new-rescue-request', (data) => {
+        console.log('Thông tin đã được nhận từ partner: ', data);
+    });
     //listen event user back
     useEffect(() => {
         const backAction = () => {

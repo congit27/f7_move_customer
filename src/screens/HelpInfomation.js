@@ -18,7 +18,7 @@ const data = [
     { label: 'Item 8', value: '8' },
 ];
 const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
-    const socket = io('https://railwaytest-production-a531.up.railway.app/');
+    const socket = io('http://192.168.0.102:3000');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
@@ -54,7 +54,6 @@ const HelpInfomation = ({ handleCloseHelpInfo, handleSearch }) => {
 
         return () => backHandler.remove();
     }, []);
-
 
     const handleSendRequest = () => {
         console.log('Send request, location: ', location);

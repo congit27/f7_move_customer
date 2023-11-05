@@ -1,29 +1,42 @@
 {
-    "expo": {
-        "name": "f7_move",
-        "slug": "f7_move",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/icon.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./assets/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
-            }
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "permissions": ["CAMERA", "AUDIO_RECORDING", "LOCATION"]
+  "expo": {
+    "name": "f7_move",
+    "slug": "f7_move",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "y"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.trinachaitic.f7_move"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "permissions": [
+      "CAMERA",
+      "AUDIO_RECORDING",
+      "LOCATION"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "24af1084-e81e-4027-b90f-5f2d80963eb5"
+      }
     }
+  }
 }

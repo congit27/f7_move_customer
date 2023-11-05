@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import io from 'socket.io-client';
 import { View, Text, Modal } from 'react-native';
 
 import styles from './ScreensStyles';
@@ -15,6 +15,7 @@ const Help = ({ navigation }) => {
     const [showSearching, setShowSearching] = useState(false);
     const [showReceived, setShowReceived] = useState(false);
     const [showPrice, setShowPrice] = useState(false);
+    const socket = io('http://192.168.0.102:3000');
 
     const handleShowHelpInfo = () => {
         setShowMap(false);
@@ -30,10 +31,14 @@ const Help = ({ navigation }) => {
         setShowSearching(true);
     };
 
+    // Xử lí hủy tìm kiếm
     const handleCancelSearch = () => {
         setShowHelpInfo(true);
         setShowMap(false);
         setShowSearching(false);
+
+        console.log('Send cancel request!');
+        socket.emit('cancel-rescue-request', { message: 'Hủy yêu cầu!' });
     };
 
     const handleDirectToPrice = () => {

@@ -7,7 +7,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './MapViewComponentStyles';
 
 const MapViewComponent = ({ handleShowHelpInfo }) => {
-    const socket = io('https://railwaytest-production-a531.up.railway.app/');
+    const socket = io('http://192.168.0.102:3000');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
