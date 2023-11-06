@@ -3,7 +3,7 @@ import { View, Text, TextInput, ScrollView, BackHandler, TouchableOpacity, Alert
 import io from 'socket.io-client';
 import * as Location from 'expo-location';
 import styles from './ScreensStyles';
-import HeaderButton from '../components/headerButton/HeaderButton';
+import HeaderButton from '../components/HeaderButton/HeaderButton';
 import { Dropdown } from 'react-native-element-dropdown';
 import { sendRescueRequest } from '../services/webSocketConnection';
 

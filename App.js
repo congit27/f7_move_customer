@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Splash from './src/screens/splashPage/Splash';
-import OnBoarding1 from './src/screens/BoardingPage/OnBoarding1';
-import OnBoarding2 from './src/screens/BoardingSubPage/OnBoarding2';
+import BoardingPage from './src/screens/boardingPage/BoardingPage';
+import BoardingSubPage from './src/screens/boardingSubPage/BoardingSubPage';
 import HomePage from './src/screens/HomePage';
 import Navigation from './src/components/navigation/Navigation';
 import PartnerInformation from './src/screens/PartnerInformation';
@@ -27,8 +27,8 @@ const App = () => {
                 initialRouteName="Navigation"
             >
                 <Stack.Screen name="Splash" component={Splash} options={{ cardStyleInterpolator: forFade }} />
-                <Stack.Screen name="OnBoarding1" component={OnBoarding1} />
-                <Stack.Screen name="OnBoarding2" component={OnBoarding2} />
+                <Stack.Screen name="BoardingPage" component={BoardingPage} />
+                <Stack.Screen name="BoardingSubPage" component={BoardingSubPage} />
                 <Stack.Screen name="HomePage" component={HomePage} />
                 <Stack.Screen name="Navigation" component={Navigation} />
                 <Stack.Screen name="PartnerInformation" component={PartnerInformation} />

@@ -3,10 +3,10 @@ import io from 'socket.io-client';
 import { View, Text, Modal } from 'react-native';
 
 import styles from './ScreensStyles';
-import MapViewComponent from '../components/mapView/MapViewComponent';
+import MapViewComponent from '../components/MapView/MapViewComponent';
 import HelpInformation from './HelpInformation';
-import SearchingHelp from '../components/searchingHelp/SearchingHelp';
-import RequestReceived from '../components/requestReceived/RequestReceived';
+import SearchingHelp from '../components/SearchingHelp/SearchingHelp';
+import RequestReceived from '../components/RequestReceived/RequestReceived';
 import PricePage from './pricePage/PricePage';
 
 const Help = ({ navigation }) => {
