@@ -4,7 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import io from 'socket.io-client';
 import styles from './EditProfileStyles';
 import Images from '../../../assets/Images';
-import BackTopBar from '../../components/BackTopBar/BackTopBar';
+import BackTopBar from '../../components/backTopbar/BackTopbar';
 
 const EditProfile = ({ editBackToInfo }) => {
     const socket = io('http://192.168.0.102:3000');

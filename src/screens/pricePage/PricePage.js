@@ -4,7 +4,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import styles from './PricePageStyles';
 import Images from '../../../assets/Images';
-import PriceItem from '../../components/PriceItem/PriceItem';
+import PriceItem from '../../components/priceItem/PriceItem';
 
 const PricePage = () => {
     return (
