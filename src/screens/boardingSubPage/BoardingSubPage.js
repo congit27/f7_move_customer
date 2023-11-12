@@ -27,7 +27,7 @@ const BoardingSubPage = ({ navigation }) => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 style={styles.btnTextContainer}
-                                onPress={() => navigation.navigate('Navigation')}
+                                onPress={() => navigation.navigate('PhoneVerify')}
                             >
                                 <Text style={styles.btnText}>Next</Text>
                             </TouchableOpacity>
