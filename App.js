@@ -26,7 +26,7 @@ const App = () => {
                     headerShown: false,
                     cardStyleInterpolator: forFade,
                 }}
-                initialRouteName="Splash"
+                initialRouteName="HomePage"
             >
                 <Stack.Screen name="Splash" component={Splash} options={{ cardStyleInterpolator: forFade }} />
                 <Stack.Screen name="BoardingPage" component={BoardingPage} />
