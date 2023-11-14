@@ -5,7 +5,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './MapViewComponentStyles';
 
-const MapViewComponent = ({ handleShowHelpInfo }) => {
+const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
@@ -45,13 +45,15 @@ const MapViewComponent = ({ handleShowHelpInfo }) => {
                         ></Marker>
                     </MapView>
 
-                    <TouchableOpacity
-                        activeOpacity={0.8}
-                        style={styles.btnTextContainer}
-                        onPress={() => handleShowHelpInfo()}
-                    >
-                        <Text style={styles.btnText}>Yêu cầu cứu hộ</Text>
-                    </TouchableOpacity>
+                    {showBtn && (
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            style={styles.btnTextContainer}
+                            onPress={() => handleShowHelpInfo()}
+                        >
+                            <Text style={styles.btnText}>Yêu cầu cứu hộ</Text>
+                        </TouchableOpacity>
+                    )}
                 </>
             )}
         </>
