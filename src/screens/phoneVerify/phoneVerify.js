@@ -11,6 +11,8 @@ const PhoneVerify = ({ navigation }) => {
             const response = await handleCustomerLogin({ phone: phoneNumber });
             if (response.data && response.data.EC === 0) {
                 navigation.navigate('OTPVerify', { otp: response.data.DT.otp });
+            } else {
+                Alert.alert('Error: Phone is incorrect!');
             }
         } catch (error) {
             console.error(error);
