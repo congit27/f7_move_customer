@@ -1,13 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import io from 'socket.io-client';
 import styles from './EditProfileStyles';
 import Images from '../../../assets/Images';
-import BackTopBar from '../../components/backTopbar/BackTopbar';
+import BackTopBar from '../../components/backTopBar/BackTopBar';
 
 const EditProfile = ({ editBackToInfo }) => {
-    const socket = io('http://192.168.0.102:3000');
     const HandleTest = () => {
         console.log('Test thông báo');
         socket.emit('new-notification', { message: 'Lưu profile thành công' });

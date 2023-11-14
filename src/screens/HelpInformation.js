@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, BackHandler, TouchableOpacity, Alert } from 'react-native';
-import io from 'socket.io-client';
 import * as Location from 'expo-location';
 import styles from './ScreensStyles';
 import HeaderButton from '../components/headerButton/HeaderButton';
 import { Dropdown } from 'react-native-element-dropdown';
-import { sendRescueRequest } from '../services/webSocketConnection';
+import WebSocketManager from '../services/WebSocketManager';
 
 //data dropdown test
 const data = [
@@ -19,7 +18,6 @@ const data = [
     { label: 'Item 8', value: '8' },
 ];
 const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
-    const socket = io('http://192.168.0.102:3000');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
@@ -57,7 +55,8 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
     }, []);
 
     const handleSendRequest = () => {
-        sendRescueRequest(location);
+        const webSocketManager = new WebSocketManager();
+        webSocketManager.sendRescueRequest(location);
         handleCloseHelpInfo();
         handleSearch();
     };
