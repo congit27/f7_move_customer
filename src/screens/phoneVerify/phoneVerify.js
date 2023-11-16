@@ -15,7 +15,7 @@ const PhoneVerify = ({ navigation }) => {
             }
             const response = await handleCustomerLogin({ userName: userName, password: password });
             if (response.data && response.data.EC === 0) {
-                navigation.navigate('HomePage');
+                navigation.navigate('Navigation');
             } else {
                 Alert.alert('Error: Your UserName or password is incorrect!');
             }
