@@ -26,6 +26,11 @@
             "favicon": "./assets/favicon.png"
         },
         "permissions": ["CAMERA", "AUDIO_RECORDING", "LOCATION"],
+        "extra": {
+            "eas": {
+                "projectId": "78a4ba02-1d38-4e32-8d6c-e16d5f983115"
+            }
+        },
         "runtimeVersion": {
             "policy": "appVersion"
         },

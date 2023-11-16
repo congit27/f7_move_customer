@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
 
     loginContent: {
         marginVertical: 15,
+        gap: 10,
     },
 
     inputContent: {
@@ -37,17 +38,23 @@ const styles = StyleSheet.create({
         borderLeftWidth: 1,
         paddingLeft: 10,
     },
-
     btnContinue: {
         backgroundColor: '#45849f',
         padding: 15,
         borderRadius: 10,
+        marginTop: 20,
     },
-    btnText: {
+    btnTextLogin: {
         textAlign: 'center',
         color: '#fff',
         fontSize: 17,
         fontWeight: 'bold',
+    },
+
+    btnTextSignUp: {
+        fontSize: 15,
+        color: '#45849f',
+        marginLeft: 120,
     },
 });
 
