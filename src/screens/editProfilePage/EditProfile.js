@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, TouchableOpacity, ScrollView } from 'reac
 import { MaterialIcons } from '@expo/vector-icons';
 import styles from './EditProfileStyles';
 import Images from '../../../assets/Images';
-import BackTopBar from '../../components/backTopBar/BackTopBar';
+import BackTopBar from '../../components/backTopbar/BackTopbar';
 
 const EditProfile = ({ editBackToInfo }) => {
     const HandleTest = () => {
