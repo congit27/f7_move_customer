@@ -44,6 +44,39 @@ class WebSocketManager {
         console.log('Send request, location: ', location);
         this.socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
     }
+
+    receiveAcceptanceNotification(callback) {
+        if (!this.socket || !this.socket.connected) {
+            console.log('Not connected. Connecting...');
+            this.connect();
+        }
+
+        this.socket.on('accepted-request', (data) => {
+            callback(data);
+        });
+    }
+
+    receiveComingNotification(callback) {
+        if (!this.socket || !this.socket.connected) {
+            console.log('Not connected. Connecting...');
+            this.connect();
+        }
+
+        this.socket.on('come-notification-partner', (data) => {
+            callback(data);
+        });
+    }
+
+    receiveCostNotice(callback) {
+        if (!this.socket || !this.socket.connected) {
+            console.log('Not connected. Connecting...');
+            this.connect();
+        }
+
+        this.socket.on('cost-notice-partner', (data) => {
+            callback(data);
+        });
+    }
 }
 
 export default WebSocketManager;
