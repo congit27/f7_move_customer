@@ -9,6 +9,7 @@ import Navigation from './src/components/navigation/Navigation';
 import PartnerInformation from './src/screens/PartnerInformation';
 import PhoneVerify from './src/screens/phoneVerify/phoneVerify';
 import OTPVerify from './src/screens/OTPVerify/OTPVerify';
+import RegisterUser from './src/screens/registerUser/RegisterUser';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ const App = () => {
                 <Stack.Screen name="PartnerInformation" component={PartnerInformation} />
                 <Stack.Screen name="PhoneVerify" component={PhoneVerify} />
                 <Stack.Screen name="OTPVerify" component={OTPVerify} />
+                <Stack.Screen name="RegisterUser" component={RegisterUser} />
             </Stack.Navigator>
         </NavigationContainer>
     );
