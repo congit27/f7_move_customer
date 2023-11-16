@@ -15,7 +15,7 @@ const Splash = ({ navigation }) => {
                 </View>
                 <View style={styles.btnContainer}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('boardingPage')}
+                        onPress={() => navigation.navigate('BoardingPage')}
                         activeOpacity={0.8}
                         style={styles.btnTextContainer}
                     >

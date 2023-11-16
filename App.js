@@ -7,6 +7,8 @@ import BoardingSubPage from './src/screens/boardingSubPage/BoardingSubPage';
 import HomePage from './src/screens/HomePage';
 import Navigation from './src/components/navigation/Navigation';
 import PartnerInformation from './src/screens/PartnerInformation';
+import PhoneVerify from './src/screens/phoneVerify/phoneVerify';
+import OTPVerify from './src/screens/OTPVerify/OTPVerify';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +26,7 @@ const App = () => {
                     headerShown: false,
                     cardStyleInterpolator: forFade,
                 }}
-                initialRouteName="Navigation"
+                initialRouteName="Splash"
             >
                 <Stack.Screen name="Splash" component={Splash} options={{ cardStyleInterpolator: forFade }} />
                 <Stack.Screen name="BoardingPage" component={BoardingPage} />
@@ -32,6 +34,8 @@ const App = () => {
                 <Stack.Screen name="HomePage" component={HomePage} />
                 <Stack.Screen name="Navigation" component={Navigation} />
                 <Stack.Screen name="PartnerInformation" component={PartnerInformation} />
+                <Stack.Screen name="PhoneVerify" component={PhoneVerify} />
+                <Stack.Screen name="OTPVerify" component={OTPVerify} />
             </Stack.Navigator>
         </NavigationContainer>
     );
