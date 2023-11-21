@@ -2,9 +2,10 @@ import { Platform, StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         padding: 15,
         backgroundColor: '#ffffff',
+        height: Dimensions.get('window').height,
     },
 
     //partner infomation
