@@ -1,4 +1,4 @@
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
@@ -32,41 +32,82 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
         })();
     }, []);
 
-    // useEffect(() => {
-    //     const fetchRoute = async () => {
-    //         if (partnerLocation && customerLocation) {
-    //             const apiKey = 'dXXxyyQIZRgRawqHkPHk6OTjHQVDJmHxLA2VZK4d';
-    //             try {
-    //                 const response = await axios.get(
-    //                     // `https://rsapi.goong.io/Direction?${customerLocation.coords.longitude},${customerLocation.coords.latitude};${partnerLocation.coords.longitude},${partnerLocation.coords.latitude}?key=${apiKey}`,
-    //                     'https://rsapi.goong.io/DistanceMatrix?origins=20.981971,105.864323&destinations=21.031011,105.783206%7C21.022328,105.790480%7C21.016665,105.788774&vehicle=car&api_key={dXXxyyQIZRgRawqHkPHk6OTjHQVDJmHxLA2VZK4d}',
-    //                 );
+    useEffect(() => {
+        const fetchRoute = async () => {
+            if (partnerLocation && customerLocation) {
+                const apiKey = '14W0x2W1ZCBpiFYpaedfKpDE70o91iKxslLyEfw2';
+                try {
+                    console.log(customerLocation.coords.longitude);
+                    const response = await axios.get(
+                        // `https://rsapi.goong.io/Direction?${customerLocation.coords.longitude},${customerLocation.coords.latitude};${partnerLocation.coords.longitude},${partnerLocation.coords.latitude}?key=${apiKey}`,
+                        `https://rsapi.goong.io/Direction?origin=${customerLocation.coords.latitude},${customerLocation.coords.longitude}&destination=16.08166,108.21615&vehicle=car&api_key=${apiKey}`,
+                    );
 
-    //                 if (response.data.code === 'Ok') {
-    //                     setRouteData(response.data);
-    //                 } else {
-    //                     console.error('Error fetching directions API:', response.data.message);
-    //                 }
-    //             } catch (error) {
-    //                 console.error('Error fetching directions API:', error.message);
-    //             }
-    //         }
-    //     };
+                    if (response.status === 200) {
+                        setRouteData(response.data);
+                    } else {
+                        console.error('Error fetching directions API:', response.data.message);
+                    }
+                } catch (error) {
+                    console.error('Error fetching directions API!:', error.message);
+                }
+            }
+        };
 
-    //     fetchRoute();
-    // }, [partnerLocation, customerLocation]);
+        fetchRoute();
+    }, [partnerLocation, customerLocation]);
+
+    console.log(routeData);
+
+    function decodePolyline(polyline) {
+        var points = [];
+        var index = 0,
+            len = polyline.length;
+        var lat = 0,
+            lng = 0;
+
+        while (index < len) {
+            var b,
+                shift = 0,
+                result = 0;
+            do {
+                b = polyline.charCodeAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            var dlat = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
+            lat += dlat;
+
+            shift = 0;
+            result = 0;
+            do {
+                b = polyline.charCodeAt(index++) - 63;
+                result |= (b & 0x1f) << shift;
+                shift += 5;
+            } while (b >= 0x20);
+            var dlng = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
+            lng += dlng;
+
+            points.push({
+                latitude: lat / 1e5,
+                longitude: lng / 1e5,
+            });
+        }
+        return points;
+    }
 
     return (
         <>
             {customerLocation && (
                 <>
                     <MapView
-                        style={styles.map}
-                        initialRegion={{
-                            latitude: customerLocation.coords.latitude,
-                            longitude: customerLocation.coords.longitude,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
+                        style={{ flex: 1 }}
+                        initialCamera={{
+                            center: {
+                                latitude: customerLocation.coords.latitude,
+                                longitude: customerLocation.coords.longitude,
+                            },
+                            zoom: 1,
                         }}
                     >
                         <Marker
@@ -75,28 +116,25 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
                                 longitude: customerLocation.coords.longitude,
                             }}
                             title="Your Location"
-                            description="You are here!"
-                        ></Marker>
+                        />
+
                         {partnerLocation && (
                             <Marker
                                 coordinate={{
-                                    latitude: 16.08166, //partnerLocation.coords.latitude
+                                    latitude: 16.08166, // partnerLocation.coords.latitude,
                                     longitude: 108.21615, //partnerLocation.coords.longitude,
                                 }}
                                 title="Partner's Location"
-                                description="Partner is here!"
-                            ></Marker>
+                            />
                         )}
-                        {/* {routeData && (
-                            <MapView.Polyline
-                                coordinates={routeData.routes[0].geometry.coordinates.map((coord) => ({
-                                    latitude: coord[1],
-                                    longitude: coord[0],
-                                }))}
+
+                        {routeData && (
+                            <Polyline
+                                coordinates={decodePolyline(routeData.routes[0].overview_polyline.points)}
                                 strokeWidth={4}
                                 strokeColor="#4285F4" // Màu của lộ trình
                             />
-                        )} */}
+                        )}
                     </MapView>
 
                     {showBtn && (

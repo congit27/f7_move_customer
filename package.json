@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
+    "@goongmaps/goong-map-react-native": "^0.0.7",
     "@react-navigation/bottom-tabs": "^6.5.9",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "axios": "^1.6.1",
-
     "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~49.0.11",
     "expo-location": "~16.1.0",
