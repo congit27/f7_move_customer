@@ -33,7 +33,7 @@ class WebSocketManager {
         }
     }
 
-    sendRescueRequest(location) {
+    sendRescueRequest(data) {
         // Kiểm tra xem đã có kết nối chưa
         if (!this.socket || !this.socket.connected) {
             console.log('Not connected. Connecting...');
@@ -41,8 +41,8 @@ class WebSocketManager {
         }
 
         // Gửi yêu cầu cứu hộ
-        console.log('Send request, location: ', location);
-        this.socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
+        console.log('Send request, location: ', data.location);
+        this.socket.emit('rescue-request', { ...data });
     }
 
     receiveAcceptanceNotification(callback) {

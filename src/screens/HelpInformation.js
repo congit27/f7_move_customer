@@ -20,6 +20,15 @@ const data = [
 const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [statusContent, setStatusContent] = useState('');
+    const [carBrand, setCarBrand] = useState('');
+    const [color, setColor] = useState('');
+    const [carType, setCartype] = useState('');
+    const [licensePlates, setLicensePlates] = useState(''); //biển số xe
+    const [note, setNote] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -55,8 +64,36 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
     }, []);
 
     const handleSendRequest = () => {
+        if (
+            !location ||
+            !name ||
+            !phone ||
+            !address ||
+            !statusContent ||
+            !carBrand ||
+            !carType ||
+            !color ||
+            !licensePlates
+        ) {
+            setNote('Vui lòng nhập tất cả các trường!');
+            return;
+        }
+
+        const data = {
+            message: `Yêu cầu cứu hộ từ ${name}!`,
+            location,
+            name,
+            phone,
+            address,
+            statusContent,
+            carBrand,
+            carType,
+            color,
+            licensePlates,
+        };
+
         const webSocketManager = new WebSocketManager();
-        webSocketManager.sendRescueRequest(location);
+        webSocketManager.sendRescueRequest(data);
         handleCloseHelpInfo();
         handleSearch();
     };
@@ -70,25 +107,26 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                 style={styles.helpInfoContainer}
             >
                 <Text style={styles.helpInfoTitleSection}>Thông tin cá nhân</Text>
+
                 <View style={styles.helpInfoInputContainer}>
                     <Text style={styles.helpInfoInputLabel}>
                         Họ và tên<Text style={styles.colorRed}>*</Text>
                     </Text>
-                    <TextInput style={styles.helpInfoInput} placeholder="Nhập họ tên..." />
+                    <TextInput style={styles.helpInfoInput} onChangeText={setName} placeholder="Nhập họ tên..." />
                 </View>
 
                 <View style={styles.helpInfoInputContainer}>
                     <Text style={styles.helpInfoInputLabel}>
                         Số điện thoại<Text style={styles.colorRed}>*</Text>
                     </Text>
-                    <TextInput style={styles.helpInfoInput} placeholder="Số điện thoại..." />
+                    <TextInput style={styles.helpInfoInput} onChangeText={setPhone} placeholder="Số điện thoại..." />
                 </View>
 
                 <View style={styles.helpInfoInputContainer}>
                     <Text style={styles.helpInfoInputLabel}>
                         Địa chỉ<Text style={styles.colorRed}>*</Text>
                     </Text>
-                    <TextInput style={styles.helpInfoInput} placeholder="Địa chỉ..." />
+                    <TextInput style={styles.helpInfoInput} onChangeText={setAddress} placeholder="Địa chỉ..." />
                 </View>
 
                 <View style={styles.helpInfoInputContainer}>
@@ -102,6 +140,7 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                             placeholder="Nhập lý do tình trạng"
                             placeholderTextColor="grey"
                             numberOfLines={10}
+                            onChangeText={setStatusContent}
                             multiline={true}
                         />
                     </View>
@@ -118,9 +157,9 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                         labelField="label"
                         valueField="value"
                         placeholder="Chọn hãng xe"
-                        // value={value}
                         onChange={(item) => {
                             setValue(item.value);
+                            setCarBrand(item.value);
                         }}
                     />
                 </View>
@@ -140,6 +179,7 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                             // value={value}
                             onChange={(item) => {
                                 setValue(item.value);
+                                setCartype(item.value);
                             }}
                         />
                     </View>
@@ -157,6 +197,7 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                             // value={value}
                             onChange={(item) => {
                                 setValue(item.value);
+                                setColor(item.value);
                             }}
                         />
                     </View>
@@ -166,8 +207,12 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                     <Text style={styles.helpInfoInputLabel}>
                         Biển số<Text style={styles.colorRed}>*</Text>
                     </Text>
-                    <TextInput style={styles.helpInfoInput} placeholder="vd: 43A-15385..." />
-
+                    <TextInput
+                        style={styles.helpInfoInput}
+                        onChangeText={setLicensePlates}
+                        placeholder="vd: 43A-15385..."
+                    />
+                    <Text style={styles.colorRed}>{note}</Text>
                     <TouchableOpacity
                         activeOpacity={0.8}
                         style={styles.btnTextSendReqHelpContainer}
