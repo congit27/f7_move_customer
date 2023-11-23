@@ -13,7 +13,7 @@ class WebSocketManager {
         }
 
         // Tạo kết nối mới
-        this.socket = io('https://railwaytest-production-a531.up.railway.app/');
+        this.socket = io('https://f7movebackend-production.up.railway.app/');
 
         // Bắt sự kiện khi kết nối thành công
         this.socket.on('connect', () => {
