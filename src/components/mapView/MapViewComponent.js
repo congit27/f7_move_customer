@@ -102,12 +102,11 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
                 <>
                     <MapView
                         style={{ flex: 1 }}
-                        initialCamera={{
-                            center: {
-                                latitude: customerLocation.coords.latitude,
-                                longitude: customerLocation.coords.longitude,
-                            },
-                            zoom: 1,
+                        initialRegion={{
+                            latitude: customerLocation.coords.latitude,
+                            longitude: customerLocation.coords.longitude,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
                         }}
                     >
                         <Marker
