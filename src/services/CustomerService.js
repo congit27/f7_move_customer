@@ -1,11 +1,17 @@
 import axios from 'axios';
 
 const handleCustomerLogin = (userName, password) => {
-    return axios.post('http://192.168.68.157:8080/api/login', userName, password);
+    return axios.post('https://f7movebackend-production.up.railway.app/api/login', userName, password);
 };
 
 const handleCustomerRegister = (email, fullName, password, userName, phone) => {
-    return axios.post('http://192.168.68.157:8080/api/register', { email, fullName, password, userName, phone });
+    return axios.post('https://f7movebackend-production.up.railway.app/api/register', {
+        email,
+        fullName,
+        password,
+        userName,
+        phone,
+    });
 };
 
 export default handleCustomerLogin;
