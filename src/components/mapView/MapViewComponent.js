@@ -12,7 +12,6 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
     const [partnerLocation, setPartnerLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [routeData, setRouteData] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     const webSocketManager = new WebSocketManager();
 
@@ -41,7 +40,7 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
                     console.log(customerLocation.coords.longitude);
                     const response = await axios.get(
                         // `https://rsapi.goong.io/Direction?${customerLocation.coords.longitude},${customerLocation.coords.latitude};${partnerLocation.coords.longitude},${partnerLocation.coords.latitude}?key=${apiKey}`,
-                        `https://rsapi.goong.io/Direction?origin=${customerLocation.coords.latitude},${customerLocation.coords.longitude}&destination=16.08166,108.21615&vehicle=car&api_key=${apiKey}`,
+                        `https://rsapi.goong.io/Direction?origin=${customerLocation.coords.latitude},${customerLocation.coords.longitude}&destination=${partnerLocation.coords.latitude},${partnerLocation.coords.longitude}5&vehicle=car&api_key=${apiKey}`,
                     );
 
                     if (response.status === 200) {
