@@ -53,7 +53,7 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                     onPress: () => null,
                     style: 'cancel',
                 },
-                { text: 'YES', onPress: () => handleCloseHelpInfo() },
+                { text: 'YES', onPress: () => {} },
             ]);
             return true;
         };

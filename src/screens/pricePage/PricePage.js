@@ -7,7 +7,7 @@ import Images from '../../../assets/Images';
 import PriceItem from '../../components/priceItem/PriceItem';
 import { io } from 'socket.io-client';
 
-const socket = io('https://railwaytest-production-1ca0.up.railway.app/');
+const socket = io('https://f7movebackend-production.up.railway.app/');
 
 const PricePage = () => {
     useEffect(() => {

@@ -11,7 +11,7 @@ import PricePage from './pricePage/PricePage';
 import WebSocketManager from '../services/WebSocketManager';
 import { io } from 'socket.io-client';
 
-const socket = io('https://railwaytest-production-1ca0.up.railway.app/');
+const socket = io('https://f7movebackend-production.up.railway.app/');
 
 const Help = ({ navigation }) => {
     const [showMap, setShowMap] = useState(true);

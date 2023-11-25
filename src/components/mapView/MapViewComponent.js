@@ -121,8 +121,8 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
                         {partnerLocation && (
                             <Marker
                                 coordinate={{
-                                    latitude: 16.08166, // partnerLocation.coords.latitude,
-                                    longitude: 108.21615, //partnerLocation.coords.longitude,
+                                    latitude: partnerLocation.coords.latitude, // 16.08166,
+                                    longitude: partnerLocation.coords.longitude, //108.21615,
                                 }}
                                 title="Partner's Location"
                             />
