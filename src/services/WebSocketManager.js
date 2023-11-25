@@ -13,7 +13,7 @@ class WebSocketManager {
         }
 
         // Tạo kết nối mới
-        this.socket = io('https://railwaytest-production-a531.up.railway.app/');
+        this.socket = io('https://railwaytest-production-1ca0.up.railway.app/');
 
         // Bắt sự kiện khi kết nối thành công
         this.socket.on('connect', () => {
@@ -33,7 +33,7 @@ class WebSocketManager {
         }
     }
 
-    sendRescueRequest(location) {
+    sendRescueRequest(data) {
         // Kiểm tra xem đã có kết nối chưa
         if (!this.socket || !this.socket.connected) {
             console.log('Not connected. Connecting...');
@@ -41,8 +41,8 @@ class WebSocketManager {
         }
 
         // Gửi yêu cầu cứu hộ
-        console.log('Send request, location: ', location);
-        this.socket.emit('rescue-request', { message: 'Yêu cầu cứu hộ từ Cong!', location: location });
+        console.log('Send request, location: ', data.location);
+        this.socket.emit('rescue-request', { ...data });
     }
 
     receiveAcceptanceNotification(callback) {

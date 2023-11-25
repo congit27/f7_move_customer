@@ -9,6 +9,9 @@ import NotificationAlert from '../components/notificationAlert/NotificationAlert
 import RequestReceived from '../components/requestReceived/RequestReceived';
 import PricePage from './pricePage/PricePage';
 import WebSocketManager from '../services/WebSocketManager';
+import { io } from 'socket.io-client';
+
+const socket = io('https://railwaytest-production-1ca0.up.railway.app/');
 
 const Help = ({ navigation }) => {
     const [showMap, setShowMap] = useState(true);
@@ -49,6 +52,8 @@ const Help = ({ navigation }) => {
 
     // Xử lí hủy tìm kiếm
     const handleCancelSearch = () => {
+        socket.emit('cancel_help', { message: 'Cancel from Customer!' });
+
         setShowHelpInfo(true);
         setShowMap(false);
         setShowSearching(false);

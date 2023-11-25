@@ -7,7 +7,6 @@ const NotificationAlert = ({ handleCancelSearch }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Đối tác đã đến</Text>
-            <LoadingDots />
 
             <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainer}>
                 <Text style={styles.btnText}>Đợi báo giá</Text>

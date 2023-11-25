@@ -1,7 +1,7 @@
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import WebSocketManager from '../../services/WebSocketManager';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
     const [partnerLocation, setPartnerLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [routeData, setRouteData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const webSocketManager = new WebSocketManager();
 
@@ -98,7 +99,7 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
 
     return (
         <>
-            {customerLocation && (
+            {customerLocation ? (
                 <>
                     <MapView
                         style={{ flex: 1 }}
@@ -147,6 +148,8 @@ const MapViewComponent = ({ handleShowHelpInfo, showBtn }) => {
                         </TouchableOpacity>
                     )}
                 </>
+            ) : (
+                <ActivityIndicator size="large" />
             )}
         </>
     );

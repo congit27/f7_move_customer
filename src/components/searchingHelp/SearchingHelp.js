@@ -50,7 +50,6 @@ const SearchingHelp = ({ handleCancelSearch }) => {
             {isRequestAccepted ? (
                 <View style={styles.container}>
                     <Text style={styles.title}>Yêu cầu cứu hộ đã được tiếp nhận!</Text>
-                    <LoadingDots />
 
                     <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainer}>
                         <Text style={styles.btnText}>Đối tác đang tới..!</Text>

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
 import styles from './PricePageStyles';
 import Images from '../../../assets/Images';
 import PriceItem from '../../components/priceItem/PriceItem';
+import { io } from 'socket.io-client';
+
+const socket = io('https://railwaytest-production-1ca0.up.railway.app/');
 
 const PricePage = () => {
+    useEffect(() => {
+        try {
+            socket.on('cost-notice-partner', (data) => console.log('>>>Check data cost notice: ', data));
+        } catch (error) {
+            console.log('socket error: ', error);
+        }
+    }, [socket]);
+
     return (
         <View style={styles.container}>
             <View style={styles.partnerContainer}>
