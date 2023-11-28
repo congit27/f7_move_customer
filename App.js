@@ -1,5 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
 
 import Splash from './src/screens/splashPage/Splash';
 import BoardingPage from './src/screens/boardingPage/BoardingPage';
@@ -21,25 +23,27 @@ const App = () => {
     });
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    headerShown: false,
-                    cardStyleInterpolator: forFade,
-                }}
-                initialRouteName="Splash"
-            >
-                <Stack.Screen name="Splash" component={Splash} options={{ cardStyleInterpolator: forFade }} />
-                <Stack.Screen name="BoardingPage" component={BoardingPage} />
-                <Stack.Screen name="BoardingSubPage" component={BoardingSubPage} />
-                <Stack.Screen name="HomePage" component={HomePage} />
-                <Stack.Screen name="Navigation" component={Navigation} />
-                <Stack.Screen name="PartnerInformation" component={PartnerInformation} />
-                <Stack.Screen name="PhoneVerify" component={PhoneVerify} />
-                <Stack.Screen name="OTPVerify" component={OTPVerify} />
-                <Stack.Screen name="RegisterUser" component={RegisterUser} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: false,
+                        cardStyleInterpolator: forFade,
+                    }}
+                    initialRouteName="Splash"
+                >
+                    <Stack.Screen name="Splash" component={Splash} options={{ cardStyleInterpolator: forFade }} />
+                    <Stack.Screen name="BoardingPage" component={BoardingPage} />
+                    <Stack.Screen name="BoardingSubPage" component={BoardingSubPage} />
+                    <Stack.Screen name="HomePage" component={HomePage} />
+                    <Stack.Screen name="Navigation" component={Navigation} />
+                    <Stack.Screen name="PartnerInformation" component={PartnerInformation} />
+                    <Stack.Screen name="PhoneVerify" component={PhoneVerify} />
+                    <Stack.Screen name="OTPVerify" component={OTPVerify} />
+                    <Stack.Screen name="RegisterUser" component={RegisterUser} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </Provider>
     );
 };
 

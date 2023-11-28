@@ -1,12 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
 import styles from './phoneVerifyStyles';
-
+import { useDispatch, useSelector } from 'react-redux'; // Import hooks từ react-redux
+import { UserName } from '../../redux/actions';
 import handleCustomerLogin from '../../services/CustomerService';
 
 const PhoneVerify = ({ navigation }) => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+    const userNameFromRedux = useSelector((state) => state.userName);
+
     const handleLogin = async () => {
         try {
             if (!userName || !password) {
@@ -15,6 +20,8 @@ const PhoneVerify = ({ navigation }) => {
             }
             const response = await handleCustomerLogin({ userName: userName, password: password });
             if (response.data && response.data.EC === 0) {
+                dispatch(UserName(userName));
+
                 navigation.navigate('Navigation');
             } else {
                 Alert.alert('Error: Your UserName or password is incorrect!');

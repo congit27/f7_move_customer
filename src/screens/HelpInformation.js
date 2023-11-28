@@ -5,30 +5,27 @@ import styles from './ScreensStyles';
 import HeaderButton from '../components/headerButton/HeaderButton';
 import { Dropdown } from 'react-native-element-dropdown';
 import WebSocketManager from '../services/WebSocketManager';
-
-//data dropdown test
-const data = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-];
+import { handleGetAllBrandCar, handleGetAllTypeCar, handleGetAllColorCar } from '../services/CustomerService';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserName } from '../redux/actions'; //
 const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [brandData, setBrandData] = useState([]);
+    const [selectedBrand, setSelectedBrand] = useState(null);
+    const [typeData, setTypeData] = useState([]);
+    const [selectedType, setSelectedType] = useState(null);
+    const [colorData, setColorData] = useState([]);
+    const [selectedColor, setSelectedColor] = useState(null);
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
     const [statusContent, setStatusContent] = useState('');
-    const [carBrand, setCarBrand] = useState('');
-    const [color, setColor] = useState('');
-    const [carType, setCartype] = useState('');
     const [licensePlates, setLicensePlates] = useState(''); //biển số xe
     const [note, setNote] = useState('');
+
+    const userName = useSelector((state) => state.userName);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         (async () => {
@@ -53,7 +50,7 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                     onPress: () => null,
                     style: 'cancel',
                 },
-                { text: 'YES', onPress: () => {} },
+                { text: 'YES', onPress: () => handleCloseHelpInfo() },
             ]);
             return true;
         };
@@ -70,9 +67,9 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
             !phone ||
             !address ||
             !statusContent ||
-            !carBrand ||
-            !carType ||
-            !color ||
+            !brandData ||
+            !typeData ||
+            !colorData ||
             !licensePlates
         ) {
             setNote('Vui lòng nhập tất cả các trường!');
@@ -86,10 +83,11 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
             phone,
             address,
             statusContent,
-            carBrand,
-            carType,
-            color,
+            selectedBrand: selectedBrand.nameBrand,
+            selectedType: selectedType.nameType,
+            selectedColor: selectedColor.nameColor,
             licensePlates,
+            userName,
         };
 
         const webSocketManager = new WebSocketManager();
@@ -97,6 +95,30 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
         handleCloseHelpInfo();
         handleSearch();
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const dataBrand = await handleGetAllBrandCar();
+                const dataType = await handleGetAllTypeCar();
+                const dataColor = await handleGetAllColorCar();
+                if (dataBrand && dataBrand.data && dataBrand.data.DT) {
+                    setBrandData(dataBrand.data.DT);
+                }
+                if (dataType && dataType.data && dataType.data.DT) {
+                    setTypeData(dataType.data.DT);
+                }
+                if (dataColor && dataColor.data && dataColor.data.DT) {
+                    setColorData(dataColor.data.DT);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                Alert.alert('Error', 'Something went wrong.');
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -152,15 +174,16 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                     </Text>
                     <Dropdown
                         style={styles.dropdown}
-                        data={data}
+                        data={brandData.map((item) => ({ label: item.Name, value: item.id }))}
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
                         placeholder="Chọn hãng xe"
                         onChange={(item) => {
+                            setSelectedBrand({ nameBrand: item.label, value: item.value }); // Lấy giá trị từ item.label
                             setValue(item.value);
-                            setCarBrand(item.value);
                         }}
+                        value={selectedBrand}
                     />
                 </View>
 
@@ -171,16 +194,16 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                         </Text>
                         <Dropdown
                             style={styles.dropdown}
-                            data={data}
+                            data={typeData.map((item) => ({ label: item.Name, value: item.id }))}
                             maxHeight={300}
                             labelField="label"
                             valueField="value"
                             placeholder="Loại xe"
-                            // value={value}
                             onChange={(item) => {
+                                setSelectedType({ nameType: item.label, value: item.value }); // Lấy giá trị từ item.label
                                 setValue(item.value);
-                                setCartype(item.value);
                             }}
+                            value={selectedType}
                         />
                     </View>
                     <View style={styles.helpInfoInputContainer}>
@@ -189,16 +212,16 @@ const HelpInformation = ({ handleCloseHelpInfo, handleSearch }) => {
                         </Text>
                         <Dropdown
                             style={styles.dropdown}
-                            data={data}
+                            data={colorData.map((item) => ({ label: item.Name, value: item.id }))}
                             maxHeight={300}
                             labelField="label"
                             valueField="value"
                             placeholder="Màu sắc"
-                            // value={value}
                             onChange={(item) => {
+                                setSelectedColor({ nameColor: item.label, value: item.value }); // Lấy giá trị từ item.label
                                 setValue(item.value);
-                                setColor(item.value);
                             }}
+                            value={selectedColor}
                         />
                     </View>
                 </View>
