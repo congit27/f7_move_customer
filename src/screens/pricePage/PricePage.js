@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 
@@ -10,13 +10,34 @@ import { io } from 'socket.io-client';
 const socket = io('https://f7movebackend-production.up.railway.app/');
 
 const PricePage = () => {
+    const [costData, setCostData] = useState([]);
+    const [totalCost, setTotalCost] = useState(0);
+
     useEffect(() => {
         try {
-            socket.on('cost-notice-partner', (data) => console.log('>>>Check data cost notice: ', data));
+            socket.on('cost-notice-partner', (data) => setCostData(data));
         } catch (error) {
             console.log('socket error: ', error);
         }
     }, [socket]);
+
+    useEffect(() => {
+        let totaLabel = 0;
+        if (costData) {
+            costData.map((item) => {
+                let keyss = Object.keys(item)[0];
+                item[keyss].map((val) => {
+                    totaLabel += val.price;
+                });
+            });
+            setTotalCost(totaLabel);
+        }
+    });
+
+    console.log('>>>>>Check data', costData);
+
+    const config = { style: 'currency', currency: 'VND', maximumFractionDigits: 9 };
+    const formated = new Intl.NumberFormat('vi-VN', config).format(totalCost);
 
     return (
         <View style={styles.container}>
@@ -43,59 +64,30 @@ const PricePage = () => {
             </View>
 
             <ScrollView style={styles.pricePageContainer}>
-                <View style={styles.section}>
-                    <Text style={styles.cateTitle}>
-                        Hạng mục cần sửa<Text style={styles.colorRed}>*</Text>
-                    </Text>
-                    <View style={styles.cateItemContainer}>
-                        <PriceItem title={'Thay Bugi(gồm 6-8 bánh)'} price={'800.000đ'} />
-                        <PriceItem title={'Thay Bugi(gồm 6-8 bánh)'} price={'800.000đ'} />
-                        <PriceItem title={'Thay Bugi(gồm 6-8 bánh)'} price={'800.000đ'} />
-                    </View>
-                </View>
+                {costData &&
+                    costData.map((item) => (
+                        <View key={Object.keys(item)[0]} style={styles.section}>
+                            <Text style={styles.cateTitle}>
+                                {Object.keys(item)[0]}
+                                <Text style={styles.colorRed}>*</Text>
+                            </Text>
+                            <View style={styles.cateItemContainer}>
+                                {item[Object.keys(item)[0]].map((val) => (
+                                    <PriceItem title={val.value} price={val.price} />
+                                ))}
+                            </View>
+                        </View>
+                    ))}
 
                 <View style={styles.section}>
-                    <Text style={styles.cateTitle}>
-                        Hạng mục cần sửa<Text style={styles.colorRed}>*</Text>
-                    </Text>
-                    <View style={styles.cateItemContainer}>
-                        <PriceItem title={'Thay Bugi(gồm 6-8 bánh)'} price={'800.000đ'} />
-                        <PriceItem title={'Thay Bugi(gồm 6-8 bánh)'} price={'800.000đ'} />
-                    </View>
-                </View>
-
-                <View style={styles.section}>
-                    <Text style={styles.cateTitle}>Chi tiết</Text>
-                    <View style={styles.detailsContainer}>
-                        <View style={styles.detailItem}>
-                            <Text>Số hạng mục</Text>
-                            <Text>2</Text>
-                        </View>
-                        <View style={styles.detailItem}>
-                            <Text>Giá phụ kiện</Text>
-                            <Text>2</Text>
-                        </View>
-                        <View style={styles.detailItem}>
-                            <Text>Phí sửa</Text>
-                            <Text>2</Text>
-                        </View>
-                        <View style={styles.detailItem}>
-                            <Text>Thuế</Text>
-                            <Text>2</Text>
-                        </View>
-                    </View>
-
                     <View style={styles.totalPriceContainer}>
                         <Text style={styles.cateTitle}>Tổng chi phí</Text>
-                        <Text style={styles.totalPrice}>1.080.000đ</Text>
+                        <Text style={styles.totalPrice}>{formated}</Text>
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <View style={styles.btnContainer}>
-                        <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainerDenied}>
-                            <Text style={styles.btnText}>Từ chối</Text>
-                        </TouchableOpacity>
                         <TouchableOpacity activeOpacity={0.8} style={styles.btnTextContainer}>
                             <Text style={styles.btnText}>Chấp nhận</Text>
                         </TouchableOpacity>

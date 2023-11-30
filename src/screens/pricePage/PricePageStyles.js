@@ -111,18 +111,21 @@ const styles = StyleSheet.create({
     },
 
     btnContainer: {
+        // width: Dimensions.get('window').width,
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
+        justifyContent: 'center',
         marginVertical: 20,
     },
     btnTextContainer: {
+        textAlign: 'center',
+        width: 300,
         backgroundColor: 'green',
         paddingVertical: 10,
         borderRadius: 15,
     },
     btnText: {
-        width: 150,
+        // width: 150,
         fontSize: 18,
         padding: 5,
         color: '#ffffff',
